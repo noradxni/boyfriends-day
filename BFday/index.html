@@ -1,0 +1,2121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>For You ♡</title>
+
+
+    <style>
+
+        /* =========================================================
+           COLOUR PALETTE
+        ========================================================= */
+
+        :root {
+
+            --lavender: #c8b6e8;
+            --light-lavender: #eee7f8;
+            --dark-purple: #594275;
+            --deep-purple: #382746;
+
+            --cream: #faf7f2;
+            --white: #ffffff;
+
+            --text: #332b38;
+            --soft-text: #756b7d;
+
+        }
+
+
+        /* =========================================================
+           GENERAL
+        ========================================================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    #e9def5,
+                    transparent 35%
+                ),
+                var(--cream);
+
+            color: var(--text);
+
+            font-family: Georgia, serif;
+
+            min-height: 100vh;
+
+        }
+
+
+        button,
+        input {
+
+            font-family: inherit;
+
+        }
+
+
+        /* =========================================================
+           PASSWORD SCREEN
+        ========================================================= */
+
+        #password-screen {
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eee7f8,
+                    #d8c9ed
+                );
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            z-index: 1000;
+
+        }
+
+
+        .password-box {
+
+            width: 430px;
+
+            max-width: 90%;
+
+            background: rgba(255,255,255,0.85);
+
+            padding: 50px;
+
+            border-radius: 25px;
+
+            text-align: center;
+
+            box-shadow:
+                0 20px 60px rgba(70,40,90,0.15);
+
+        }
+
+
+        .password-box .lock {
+
+            font-size: 45px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .password-box h1 {
+
+            color: var(--deep-purple);
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .password-box p {
+
+            color: var(--soft-text);
+
+            margin-bottom: 30px;
+
+        }
+
+
+        #password-input {
+
+            width: 100%;
+
+            padding: 14px 18px;
+
+            border: 1px solid #d4c8df;
+
+            border-radius: 12px;
+
+            outline: none;
+
+            font-size: 16px;
+
+            text-align: center;
+
+            background: white;
+
+        }
+
+
+        #password-input:focus {
+
+            border-color: var(--dark-purple);
+
+        }
+
+
+        #password-error {
+
+            color: #9b4d73;
+
+            margin-top: 15px;
+
+            min-height: 20px;
+
+        }
+
+
+        /* =========================================================
+           MAIN WEBSITE
+        ========================================================= */
+
+        #website {
+
+            display: none;
+
+            min-height: 100vh;
+
+        }
+
+
+        .page {
+
+            display: none;
+
+            min-height: 100vh;
+
+            padding: 70px;
+
+            align-items: center;
+
+            justify-content: center;
+
+        }
+
+
+        .page.active {
+
+            display: flex;
+
+            animation: fadeIn 0.6s ease;
+
+        }
+
+
+        @keyframes fadeIn {
+
+            from {
+
+                opacity: 0;
+
+                transform: translateY(10px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform: translateY(0);
+
+            }
+
+        }
+
+
+        .container {
+
+            width: 100%;
+
+            max-width: 950px;
+
+            margin: auto;
+
+            text-align: center;
+
+        }
+
+
+        /* =========================================================
+           TYPOGRAPHY
+        ========================================================= */
+
+        .eyebrow {
+
+            text-transform: uppercase;
+
+            letter-spacing: 4px;
+
+            font-family: Arial, sans-serif;
+
+            font-size: 11px;
+
+            color: var(--dark-purple);
+
+            opacity: 0.75;
+
+        }
+
+
+        h1 {
+
+            font-size: 75px;
+
+            color: var(--deep-purple);
+
+            margin: 20px 0;
+
+        }
+
+
+        h2 {
+
+            font-size: 48px;
+
+            color: var(--deep-purple);
+
+            margin-bottom: 40px;
+
+        }
+
+
+        h3 {
+
+            font-size: 25px;
+
+            color: var(--deep-purple);
+
+        }
+
+
+        .subtitle {
+
+            font-size: 20px;
+
+            color: var(--soft-text);
+
+            margin-bottom: 40px;
+
+        }
+
+
+        /* =========================================================
+           BUTTONS
+        ========================================================= */
+
+        .button {
+
+            border: none;
+
+            background: var(--deep-purple);
+
+            color: white;
+
+            padding: 14px 27px;
+
+            border-radius: 30px;
+
+            font-size: 15px;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+
+            margin-top: 25px;
+
+        }
+
+
+        .button:hover {
+
+            background: var(--dark-purple);
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 8px 20px rgba(56,39,70,0.2);
+
+        }
+
+
+        /* =========================================================
+           DECORATIVE HEART
+        ========================================================= */
+
+        .floating-heart {
+
+            position: fixed;
+
+            font-size: 18px;
+
+            opacity: 0.3;
+
+            animation: float 5s infinite ease-in-out;
+
+        }
+
+
+        .heart-one {
+
+            top: 15%;
+
+            left: 10%;
+
+        }
+
+
+        .heart-two {
+
+            top: 25%;
+
+            right: 12%;
+
+            animation-delay: 1s;
+
+        }
+
+
+        .heart-three {
+
+            bottom: 15%;
+
+            left: 18%;
+
+            animation-delay: 2s;
+
+        }
+
+
+        @keyframes float {
+
+            0%, 100% {
+
+                transform: translateY(0);
+
+            }
+
+            50% {
+
+                transform: translateY(-15px);
+
+            }
+
+        }
+
+
+        /* =========================================================
+           STORY TIMELINE
+        ========================================================= */
+
+        .timeline {
+
+            max-width: 700px;
+
+            margin: auto;
+
+            text-align: left;
+
+        }
+
+
+        .timeline-item {
+
+            border-left: 2px solid var(--lavender);
+
+            padding: 5px 0 40px 30px;
+
+            position: relative;
+
+        }
+
+
+        .timeline-item::before {
+
+            content: "";
+
+            width: 12px;
+
+            height: 12px;
+
+            border-radius: 50%;
+
+            background: var(--dark-purple);
+
+            position: absolute;
+
+            left: -7px;
+
+            top: 5px;
+
+        }
+
+
+        .timeline-label {
+
+            font-family: Arial, sans-serif;
+
+            font-size: 10px;
+
+            letter-spacing: 3px;
+
+            color: var(--dark-purple);
+
+        }
+
+
+        .timeline-item p {
+
+            line-height: 1.7;
+
+            color: var(--soft-text);
+
+        }
+
+
+        /* =========================================================
+           POLAROIDS
+        ========================================================= */
+
+        .photo-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 35px;
+
+            margin: 40px 0;
+
+        }
+
+
+        .polaroid {
+
+            background: white;
+
+            padding: 12px 12px 25px;
+
+            box-shadow:
+                0 8px 20px rgba(70,40,90,0.12);
+
+            transform: rotate(-2deg);
+
+            transition: 0.3s;
+
+        }
+
+
+        .polaroid:nth-child(2) {
+
+            transform: rotate(2deg);
+
+        }
+
+
+        .polaroid:nth-child(3) {
+
+            transform: rotate(-1deg);
+
+        }
+
+
+        .polaroid:hover {
+
+            transform:
+                rotate(0deg)
+                translateY(-8px);
+
+        }
+
+
+        .photo-area {
+
+            width: 100%;
+
+            aspect-ratio: 1 / 1;
+
+            background: var(--light-lavender);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            overflow: hidden;
+
+            cursor: pointer;
+
+            position: relative;
+
+        }
+
+
+        .photo-area img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+
+        }
+
+
+        .photo-placeholder {
+
+            color: var(--soft-text);
+
+            font-family: Arial, sans-serif;
+
+            font-size: 13px;
+
+            padding: 20px;
+
+        }
+
+
+        .photo-caption {
+
+            margin-top: 15px;
+
+            font-size: 17px;
+
+            color: var(--deep-purple);
+
+        }
+
+
+        .photo-upload {
+
+            display: none;
+
+        }
+
+
+        .photo-hint {
+
+            font-family: Arial, sans-serif;
+
+            font-size: 11px;
+
+            color: var(--soft-text);
+
+            margin-top: 5px;
+
+        }
+
+
+        /* =========================================================
+           CARDS
+        ========================================================= */
+
+        .cards {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+
+        }
+
+
+        .card {
+
+            height: 190px;
+
+            perspective: 1000px;
+
+            cursor: pointer;
+
+        }
+
+
+        .card-inner {
+
+            position: relative;
+
+            width: 100%;
+
+            height: 100%;
+
+            transition: transform 0.6s;
+
+            transform-style: preserve-3d;
+
+        }
+
+
+        .card.flipped .card-inner {
+
+            transform: rotateY(180deg);
+
+        }
+
+
+        .card-front,
+        .card-back {
+
+            position: absolute;
+
+            inset: 0;
+
+            backface-visibility: hidden;
+
+            border-radius: 18px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 25px;
+
+        }
+
+
+        .card-front {
+
+            background: var(--light-lavender);
+
+            color: var(--dark-purple);
+
+            font-size: 28px;
+
+        }
+
+
+        .card-back {
+
+            background: var(--deep-purple);
+
+            color: white;
+
+            transform: rotateY(180deg);
+
+            line-height: 1.5;
+
+        }
+
+
+        /* =========================================================
+           QUIZ
+        ========================================================= */
+
+        .quiz-box {
+
+            max-width: 650px;
+
+            margin: auto;
+
+            background: white;
+
+            padding: 40px;
+
+            border-radius: 25px;
+
+            box-shadow:
+                0 10px 30px rgba(70,40,90,0.1);
+
+        }
+
+
+        #answers {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 12px;
+
+            margin-top: 30px;
+
+        }
+
+
+        .answer {
+
+            padding: 14px;
+
+            border: 1px solid var(--lavender);
+
+            border-radius: 12px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+        }
+
+
+        .answer:hover {
+
+            background: var(--light-lavender);
+
+        }
+
+
+        #quiz-result {
+
+            margin-top: 25px;
+
+            color: var(--dark-purple);
+
+            font-size: 18px;
+
+        }
+
+
+        /* =========================================================
+           ENVELOPE
+        ========================================================= */
+
+        .envelope-wrapper {
+
+            margin: 60px auto;
+
+            width: 330px;
+
+            height: 220px;
+
+            cursor: pointer;
+
+            perspective: 1000px;
+
+        }
+
+
+        .envelope {
+
+            width: 100%;
+
+            height: 100%;
+
+            position: relative;
+
+        }
+
+
+        .envelope-body {
+
+            position: absolute;
+
+            bottom: 0;
+
+            width: 100%;
+
+            height: 75%;
+
+            background: #c9b4df;
+
+            border-radius: 5px;
+
+            box-shadow:
+                0 15px 30px rgba(70,40,90,0.15);
+
+        }
+
+
+        .envelope-flap {
+
+            position: absolute;
+
+            top: 0;
+
+            width: 0;
+
+            height: 0;
+
+            border-left: 165px solid transparent;
+
+            border-right: 165px solid transparent;
+
+            border-top: 120px solid #b49bce;
+
+            transform-origin: top;
+
+            transition: transform 0.7s;
+
+            z-index: 3;
+
+        }
+
+
+        .envelope-letter {
+
+            position: absolute;
+
+            left: 10%;
+
+            bottom: 10px;
+
+            width: 80%;
+
+            height: 75%;
+
+            background: white;
+
+            padding: 20px;
+
+            z-index: 2;
+
+            transition: 0.8s;
+
+            text-align: center;
+
+            border-radius: 4px;
+
+        }
+
+
+        .envelope-wrapper.open .envelope-flap {
+
+            transform: rotateX(180deg);
+
+        }
+
+
+        .envelope-wrapper.open .envelope-letter {
+
+            transform: translateY(-150px);
+
+        }
+
+
+        .envelope-text {
+
+            color: var(--dark-purple);
+
+            font-size: 18px;
+
+        }
+
+
+        /* =========================================================
+           FINAL MESSAGE
+        ========================================================= */
+
+        .final-message {
+
+            max-width: 650px;
+
+            margin: 40px auto;
+
+            font-size: 20px;
+
+            line-height: 1.8;
+
+            color: var(--soft-text);
+
+        }
+
+
+        .big-heart {
+
+            font-size: 65px;
+
+            color: var(--dark-purple);
+
+            animation: pulse 1.7s infinite;
+
+        }
+
+
+        @keyframes pulse {
+
+            0%, 100% {
+
+                transform: scale(1);
+
+            }
+
+            50% {
+
+                transform: scale(1.12);
+
+            }
+
+        }
+
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+
+        @media (max-width: 700px) {
+
+            .page {
+
+                padding: 40px 20px;
+
+            }
+
+
+            h1 {
+
+                font-size: 50px;
+
+            }
+
+
+            h2 {
+
+                font-size: 38px;
+
+            }
+
+
+            .photo-grid,
+            .cards {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+        }
+
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================================
+         PASSWORD SCREEN
+    ========================================================= -->
+
+    <div id="password-screen">
+
+        <div class="password-box">
+
+            <div class="lock">
+                ♡
+            </div>
+
+            <h1>Hi Melbyy</h1>
+
+            <p>
+                Enter the password to acess ;3
+            </p>
+
+            <input
+                id="password-input"
+                type="password" 
+                placeholder="Enter the password"
+                onkeydown="handleEnter(event)"
+            >
+
+            <br>
+
+            <button
+                class="button"
+                onclick="checkPassword()"
+            >
+                Enter
+            </button>
+
+            <div id="password-error"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         WEBSITE
+    ========================================================= -->
+
+    <div id="website">
+
+
+        <!-- Floating decorations -->
+
+        <div class="floating-heart heart-one">♡</div>
+
+        <div class="floating-heart heart-two">♡</div>
+
+        <div class="floating-heart heart-three">♡</div>
+
+
+        <!-- =====================================================
+             LANDING
+        ====================================================== -->
+
+        <section
+            id="landing"
+            class="page active"
+        >
+
+            <div class="container">
+
+                <div class="eyebrow">
+                    dear boyfriend
+                </div>
+
+                <h1>
+                    Happy Boyfriends Day ♡
+                </h1>
+
+                <p class="subtitle">
+                    For the love of my life, my other half, my peace and home :3
+                </p>
+
+                <button
+                    class="button"
+                    onclick="showPage('story')"
+                >
+                    Start →
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             STORY
+        ====================================================== -->
+
+        <section
+            id="story"
+            class="page"
+        >
+
+            <div class="container">
+
+                <div class="eyebrow">
+                    chapter one
+                </div>
+
+                <h2>
+                    Timeline of us
+                </h2>
+
+
+                <div class="timeline">
+
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-label">
+                            THE BEGINNING
+                        </div>
+
+                        <h3>
+                            It's just fate that we sat next to each other in french class
+                        </h3>
+
+                        <p>
+                            Our dumb little convos, you totally eavesdropping on me and eleena 
+                            hehe. I didn't realise I had started looking forward to seeing you 
+                            there... You were my best friend in my head by the time you were 
+                            barely learning to tolerate me lmao. I don't know what it was about 
+                            you that made me want to learn more...
+                        </p>
+
+                    </div>
+
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-label">
+                            THE FIRST TEXT
+                        </div>
+
+                        <h3>
+                            Happy Birthday!
+                        </h3>
+
+                        <p>
+                            25/04/2026
+                            I waited until 12:50pm cuz I didn't wanna seem to eager or weird you
+                            out or anything... Looking back I was so silly lol. You said "Give the 
+                            present on Monday yeah" to which I replied "Ur present is being my 
+                            friend duh. But if u rlly insist on a present I'll play u in chess fr.
+                            If u win ill get you a present". You, being the gracious humble king 
+                            you are, said "Yea ill take a free present [laughing emoji]. Some things 
+                            never change ;)"
+                        </p>
+
+                    </div>
+
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-label">
+                            Butterflies and Slow Burns
+                        </div>
+
+                        <h3>
+                            Realising I'm falling for you...
+                        </h3>
+
+                        <p>
+                            "Like a son" she said. I didn't care that much about how I looked but 
+                            suddenly every time I came to UCD i needed to have my makeup done. Every
+                            time I wanted to ask you if you were busy (but didn't wanna put too much 
+                            pressure). IWL any thought I had of "us" i would push away... mr. <i>I dont 
+                            want a relationship right now</i> and ms. <i>I hate men</i>.  We really 
+                            were the slowest of slow burns... As all the best love stories usually are hehe
+                        </p>
+
+                    </div>
+
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-label">
+                            24/05/2026
+                        </div>
+
+                        <h3>
+                            The day I became your girlfriend
+                        </h3>
+
+                        <p>
+                            I was shitting myself nervous... I couldn't believe that you liked me enough
+                            to want to be with me... I still remember how nervous and excited I was to hold 
+                            your hand for the first time. 
+                        </p>
+
+                    </div>
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-label">
+                            NOW
+                        </div>
+
+                        <h3>
+                            Four months later... 
+                        </h3>
+
+                        <p>
+                            I can hold your hand without screaming internally now (though I still
+                            do sometimes) and I'm not so shy when i bite anymore :) The last 4 months
+                            have been amazing with you my love, and I'm so excited to spend the next
+                            4 BILLION months with you my love. I love you, I love you, I love you
+                        </p>
+
+                    </div>
+                    
+
+                </div>
+
+
+                <button
+                    class="button"
+                    onclick="showPage('photos')"
+                >
+                    Us hehe →
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             PHOTOS
+        ====================================================== -->
+
+        <section
+            id="photos"
+            class="page"
+        >
+
+            <div class="container">
+
+                <div class="eyebrow">
+                    chapter two
+                </div>
+
+                <h2>
+                    Cute lil photos of ussss
+                </h2>
+
+                <p class="subtitle">
+                    Some of my favourite photos from the past 4 months :)
+                </p>
+
+
+                <div class="photo-grid">
+
+
+                    <!-- PHOTO 1 -->
+
+                    <div class="polaroid">
+
+                        <label class="photo-area">
+
+                            <img
+                                id="photo1"
+                                src="photo1.jpeg"
+                                alt="Our first photo together"
+                            >
+
+                            <span
+                                id="placeholder1"
+                                 class="photo-placeholder"
+                            >
+                             </span>
+
+                        </label>
+
+                        <div class="photo-caption">
+                            Our first proper photo together
+                        </div>
+
+                    </div>
+
+
+                    <!-- PHOTO 2 -->
+
+                    <div class="polaroid">
+
+                        <label class="photo-area">
+
+                            <img
+                                id="photo2"
+                                src="photo2.jpeg"
+                                alt="My favourite date of ours"
+                            >
+
+                            <span
+                                id="placeholder2"
+                                 class="photo-placeholder"
+                            >
+                             </span>
+
+                        </label>
+
+                        <div class="photo-caption">
+                            My favourite date of ours
+                        </div>
+
+                    </div>
+
+
+                    <!-- PHOTO 3 -->
+
+                    <div class="polaroid">
+
+                        <label class="photo-area">
+
+                            <img
+                                id="photo3"
+                                src="photo3.jpeg"
+                                alt="My favourite photo :)"
+                            >
+
+                            <span
+                                id="placeholder3"
+                                 class="photo-placeholder"
+                            >
+                             </span>
+
+                        </label>
+
+                        <div class="photo-caption">
+                            My favourite photo :)
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <button
+                    class="button"
+                    onclick="showPage('things')"
+                >
+                    Keep going →
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             THINGS I LOVE
+        ====================================================== -->
+
+        <section
+            id="things"
+            class="page"
+        >
+
+            <div class="container">
+
+                <div class="eyebrow">
+                    chapter three
+                </div>
+
+                <h2>
+                    Things I love about you
+                </h2>
+
+                <p class="subtitle">
+                    Click the cards :)
+                </p>
+
+
+                <div class="cards">
+
+
+                    <div
+                        class="card"
+                        onclick="flipCard(this)"
+                    >
+
+                        <div class="card-inner">
+
+                            <div class="card-front">
+                                01
+                            </div>
+
+                            <div class="card-back">
+                                Your shy little smile that you think I don't notice :3
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="card"
+                        onclick="flipCard(this)"
+                    >
+
+                        <div class="card-inner">
+
+                            <div class="card-front">
+                                02
+                            </div>
+
+                            <div class="card-back">
+                                How corny and free I can be around you :0<br>
+                                nora: *says something corny* <br>
+                                melby: I.. I think I love you
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="card"
+                        onclick="flipCard(this)"
+                    >
+
+                        <div class="card-inner">
+
+                            <div class="card-front">
+                                03
+                            </div>
+
+                            <div class="card-back">
+                                The way you always follow your principles and what you believe
+                                is right :)
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="card"
+                        onclick="flipCard(this)"
+                    >
+
+                        <div class="card-inner">
+
+                            <div class="card-front">
+                                04
+                            </div>
+
+                            <div class="card-back">
+                                How hard you work, how you follow through with your word,
+                                how you're compeitive and fair even when u have the upper hand :')
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="card"
+                        onclick="flipCard(this)"
+                    >
+
+                        <div class="card-inner">
+
+                            <div class="card-front">
+                                05
+                            </div>
+
+                            <div class="card-back">
+                                How you are kind of sometimes just a little bit funny and sometimes
+                                rarely but few times make me laugh 
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="card"
+                        onclick="flipCard(this)"
+                    >
+
+                        <div class="card-inner">
+
+                            <div class="card-front">
+                                06
+                            </div>
+
+                            <div class="card-back">
+                                How loving and gentle and patient and sweet you are to me and all
+                                of the effort you put into our relationship :)
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <button
+                    class="button"
+                    onclick="showPage('quiz')"
+                >
+                    Test yourself →
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             QUIZ
+        ====================================================== -->
+
+        <section
+            id="quiz"
+            class="page"
+        >
+
+            <div class="container">
+
+                <div class="eyebrow">
+                    chapter four
+                </div>
+
+                <h2>
+                    How well do you know us?
+                </h2>
+
+
+                <div class="quiz-box">
+
+                    <h3 id="question">
+                    </h3>
+
+                    <div id="answers">
+                    </div>
+
+                    <p id="quiz-result">
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             ENVELOPE
+        ====================================================== -->
+
+        <section
+            id="envelope-page"
+            class="page"
+        >
+
+            <div class="container">
+
+                <div class="eyebrow">
+                    one last thing
+                </div>
+
+                <h2>
+                    I left you something...
+                </h2>
+
+                <p class="subtitle">
+                    Click the envelope.
+                </p>
+
+
+                <div
+                    class="envelope-wrapper"
+                    onclick="openEnvelope()"
+                    id="envelope"
+                >
+
+                    <div class="envelope">
+
+                        <div class="envelope-letter">
+
+                            <div class="envelope-text">
+                                ♡
+                            </div>
+
+                        </div>
+
+                        <div class="envelope-body">
+                        </div>
+
+                        <div class="envelope-flap">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="button"
+                    onclick="showPage('final')"
+                >
+                    Skip to the message
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             FINAL
+        ====================================================== -->
+
+        <section
+            id="final"
+            class="page"
+        >
+
+            <div class="container">
+
+                <div class="eyebrow">
+                    happy boyfriend's day
+                </div>
+
+                <h2>
+                    ♡
+                </h2>
+
+
+                <div class="final-message">
+
+                    Dear Melby,
+                    <br><br>
+                    I don't really know how to put everything I like about you into words without sounding ridiculously cheesy, but I'll try anyway.
+                    <br><br>
+                    I love how much fun we have together :) From dumb convos in French, textign and chess-trash-talking our way through LC, roblox and minecraft together… even just sitting in silence and holding you is something I could spend the whole rest of my life doing. 
+                    <br><br>
+                    I especially love playing chess with you, even though I know I haven’t been playing as much as I should be :’). I can accept defeat in chess but… not in roblox. It is quite suspicious how good you are at Dress to Impress… but you got nothing on me for Trivia though heheh. 
+                    <br><br>
+                    You're also just really funny. You can make me laugh without even trying, and I love how easily we can be completely stupid together. I never feel like I have to be particularly serious or put together around you. I can just be myself, which is something I really appreciate.
+                    <br><br>
+                    And then there's the fact that you're supposedly all nonchalant and unbothered, but you're secretly such a cutie patootie. You can try to act like you don't care, but I know better. There are all these little things about you that are just really sweet, even if you would probably deny it if I pointed them out.
+                    <br><br>
+                    I also love all the weirdly specific things that are just us. Like the fact that you say you fell in love with me when I mentioned I was a Gacha kid... Only you mister would make me feel comfortable enough to talk to you about that in the first place, and the fact that you seemed so excited to hear about it and you uneven watched some with me, it made me so happy. And ofc, I’ve never met anyone else I could share my love for BFDI with. One of my favourite memories with you:
+                    <br>   Nora: “don’t call me needy” *slap*
+                    <br>   Melby: “I.. I think I love you”
+                    <br><br>
+                    I think that's one of my favourite things about being with you. It's not just the big moments. It's all the random little things that have become ours without us even really noticing. The games, the jokes, the arguments over absolutely nothing, the stupid conversations, the things we send each other, and all the little memories that probably wouldn't mean much to anyone else but mean a lot to me.
+                    <br><br>
+                    Four months isn't a ridiculously long time, but somehow you've become such a big part of my life in that time. I'm really glad that out of all the people I could have met, I got to meet you. I'm glad I took the risk and gave you the promotion hehehe. I'm glad you found me worthy of your love too :)
+                    <br><br>
+                    I really, really love you. I'm very happy you're my person, my home, my gaming partner (hehe), my listener, my love, my life; and I'm excited for all the other random things we're going to end up doing together.
+                    <br><br>
+                    Thank you for being you, for making me laugh, for putting up with me, and for making the last four months so much more fun.
+                    <br><br>
+                    Happy Boyfriend's Day :)
+                    <br>I love you ♡
+                    <br><br>P.S. I still think I could beat you at chess if I actually tried.
+
+
+
+                </div>
+
+
+                <div class="big-heart">
+                    ♥
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </div>
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================= -->
+
+    <script>
+
+
+        /* =====================================================
+           PASSWORD
+        ====================================================== */
+
+        const PASSWORD = "2405";
+
+
+        function checkPassword() {
+
+            const enteredPassword =
+                document.getElementById(
+                    "password-input"
+                ).value;
+
+
+            if (enteredPassword === PASSWORD) {
+
+                document.getElementById(
+                    "password-screen"
+                ).style.display = "none";
+
+
+                document.getElementById(
+                    "website"
+                ).style.display = "block";
+
+            }
+
+            else {
+
+                document.getElementById(
+                    "password-error"
+                ).textContent =
+                    "Try again hehe ♡";
+
+            }
+
+        }
+
+
+        function handleEnter(event) {
+
+            if (event.key === "Enter") {
+
+                checkPassword();
+
+            }
+
+        }
+
+
+        /* =====================================================
+           PAGE NAVIGATION
+        ====================================================== */
+
+
+        function showPage(pageID) {
+
+            const pages =
+                document.querySelectorAll(".page");
+
+
+            pages.forEach(function(page) {
+
+                page.classList.remove("active");
+
+            });
+
+
+            document
+                .getElementById(pageID)
+                .classList.add("active");
+
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+
+
+        /* =====================================================
+           PHOTO UPLOADS
+        ====================================================== */
+
+
+        function loadPhoto(
+            event,
+            imageID,
+            placeholderID
+        ) {
+
+            const file =
+                event.target.files[0];
+
+
+            if (!file) {
+
+                return;
+
+            }
+
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload = function(e) {
+
+                const image =
+                    document.getElementById(
+                        imageID
+                    );
+
+
+                image.src = e.target.result;
+
+                image.style.display = "block";
+
+
+                document.getElementById(
+                    placeholderID
+                ).style.display = "none";
+
+            };
+
+
+            reader.readAsDataURL(file);
+
+        }
+
+
+        /* =====================================================
+           FLIP CARDS
+        ====================================================== */
+
+
+        function flipCard(card) {
+
+            card.classList.toggle(
+                "flipped"
+            );
+
+        }
+
+
+        /* =====================================================
+           QUIZ
+        ====================================================== */
+
+
+        const questions = [
+
+            {
+
+                question:
+                    "What movie did we see on our first date?",
+
+                answers: [
+
+                    "Minions 3",
+
+                    "Obsession",
+
+                    "I was too distracted by your eyes to remember"
+
+                ],
+
+                correct: 1
+
+            },
+
+
+            {
+
+                question:
+                    "What is my favourite thing about you?",
+
+                answers: [
+
+                    "Your personality",
+
+                    "Your face",
+
+                    "Obviously all of the above"
+
+                ],
+
+                correct: 2
+
+            },
+
+
+            {
+
+                question:
+                    "How long have we been together?",
+
+                answers: [
+
+                    "4 months",
+
+                    "4 years",
+
+                    "4 days"
+
+                ],
+
+                correct: 0
+
+            }
+
+        ];
+
+
+        let currentQuestion = 0;
+
+        let score = 0;
+
+
+        function loadQuestion() {
+
+            const question =
+                questions[currentQuestion];
+
+
+            document.getElementById(
+                "question"
+            ).textContent =
+                question.question;
+
+
+            const answers =
+                document.getElementById(
+                    "answers"
+                );
+
+
+            answers.innerHTML = "";
+
+
+            question.answers.forEach(
+                function(answer, index) {
+
+
+                    const answerButton =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    answerButton.className =
+                        "answer";
+
+
+                    answerButton.textContent =
+                        answer;
+
+
+                    answerButton.onclick =
+                        function() {
+
+                            checkAnswer(index);
+
+                        };
+
+
+                    answers.appendChild(
+                        answerButton
+                    );
+
+
+                }
+            );
+
+        }
+
+
+        function checkAnswer(selectedAnswer) {
+
+            const question =
+                questions[currentQuestion];
+
+
+            if (
+                selectedAnswer ===
+                question.correct
+            ) {
+
+                score++;
+
+            }
+
+
+            currentQuestion++;
+
+
+            if (
+                currentQuestion <
+                questions.length
+            ) {
+
+                loadQuestion();
+
+            }
+
+            else {
+
+                finishQuiz();
+
+            }
+
+        }
+
+
+        function finishQuiz() {
+
+            document.getElementById(
+                "question"
+            ).textContent =
+                "You got " +
+                score +
+                "/" +
+                questions.length;
+
+
+            document.getElementById(
+                "answers"
+            ).innerHTML = "";
+
+
+            document.getElementById(
+                "quiz-result"
+            ).textContent =
+                "Okay... I guess I'll keep you ♡";
+
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+
+            button.className =
+                "button";
+
+
+            button.textContent =
+                "There's one more thing →";
+
+
+            button.onclick =
+                function() {
+
+                    showPage(
+                        "envelope-page"
+                    );
+
+                };
+
+
+            document.getElementById(
+                "quiz-result"
+            ).appendChild(button);
+
+        }
+
+
+        loadQuestion();
+
+
+        /* =====================================================
+           ENVELOPE
+        ====================================================== */
+
+
+        function openEnvelope() {
+
+            const envelope =
+                document.getElementById(
+                    "envelope"
+                );
+
+
+            envelope.classList.add(
+                "open"
+            );
+
+
+            setTimeout(
+                function() {
+
+                    showPage("final");
+
+                },
+
+                1800
+            );
+
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>
